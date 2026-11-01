@@ -1,0 +1,24 @@
+{
+  "status": { "code": 200, "description": "success" },
+  "data": [
+    {
+      "zuid": 2000001,
+      "accountId": "1000000000000000001",
+      "primaryEmailAddress": "admin@example.com",
+      "role": "super_admin",
+      "emailAddress": [
+        { "mailId": "admin@example.com", "isAlias": false, "isPrimary": true, "isConfirmed": true },
+        { "mailId": "hello@example.com", "isAlias": true, "isPrimary": false, "isConfirmed": true }
+      ]
+    },
+    {
+      "zuid": 2000002,
+      "accountId": "1000000000000000003",
+      "primaryEmailAddress": "member@example.com",
+      "role": "member",
+      "emailAddress": [
+        { "mailId": "member@example.com", "isAlias": false, "isPrimary": true, "isConfirmed": true }
+      ]
+    }
+  ]
+}

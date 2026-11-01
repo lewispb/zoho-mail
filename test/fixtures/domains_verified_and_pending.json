@@ -1,0 +1,35 @@
+{
+  "status": { "code": 200, "description": "success" },
+  "data": {
+    "domainVO": [
+      {
+        "domainName": "example.com",
+        "domainId": "1000000000000000011",
+        "zoid": 1000001,
+        "verificationStatus": true,
+        "primary": true,
+        "isDomainAlias": false,
+        "mailHostingEnabled": true,
+        "mxstatus": "enabled",
+        "spfstatus": true,
+        "dkimstatus": true,
+        "CNAMEVerificationCode": "zb10000011",
+        "HTMLVerificationCode": "10000011"
+      },
+      {
+        "domainName": "example.org",
+        "domainId": "1000000000000000012",
+        "zoid": 1000001,
+        "verificationStatus": false,
+        "primary": false,
+        "isDomainAlias": false,
+        "mailHostingEnabled": false,
+        "mxstatus": "expired",
+        "spfstatus": false,
+        "dkimstatus": false,
+        "CNAMEVerificationCode": "zb10000012",
+        "HTMLVerificationCode": "10000012"
+      }
+    ]
+  }
+}

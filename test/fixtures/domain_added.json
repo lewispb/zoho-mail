@@ -1,0 +1,12 @@
+{
+  "status": { "code": 201, "description": "Created" },
+  "data": {
+    "domainName": "example.net",
+    "verificationStatus": false,
+    "primary": false,
+    "isRegisteredByZoho": false,
+    "createdTime": 1735689600000,
+    "CNAMEVerificationCode": "zb10000013",
+    "HTMLVerificationCode": "10000013"
+  }
+}

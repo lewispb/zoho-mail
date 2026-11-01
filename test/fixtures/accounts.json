@@ -1,0 +1,17 @@
+{
+  "status": { "code": 200, "description": "success" },
+  "data": [
+    {
+      "accountId": "1000000000000000001",
+      "accountName": "example",
+      "primaryEmailAddress": "admin@example.com",
+      "role": "super_admin",
+      "planType": 82,
+      "emailAddress": [
+        { "mailId": "admin@example.com", "isAlias": false, "isPrimary": true, "isConfirmed": true },
+        { "mailId": "hello@example.com", "isAlias": true, "isPrimary": false, "isConfirmed": true }
+      ],
+      "policyId": { "1000000000000000002": "Default policy", "zoid": 1000001 }
+    }
+  ]
+}
