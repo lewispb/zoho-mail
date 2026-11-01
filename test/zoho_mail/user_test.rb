@@ -37,6 +37,39 @@ class ZohoMail::UserTest < ActiveSupport::TestCase
     assert_equal({ "mode" => "addEmailAlias", "zuid" => 2000002, "emailAlias" => [ "info@example.com" ] }, last_request_body)
   end
 
+  test "adding an alias raises when Zoho refuses the address" do
+    respond_with_users fixture("users_as_array")
+    ActiveResource::HttpMock.respond_to(false) do |mock|
+      mock.put "/api/organization/#{ORGANIZATION_ID}/accounts/2000002", AUTHORIZATION, {
+        status: { code: 200 },
+        data: [ { "hello@example.com" => "ALIAS_ALREADY_EXISTS", "errorCode" => "EMAILADDRESS_ALREADY_EXISTS" } ]
+      }.to_json
+    end
+
+    error = assert_raises(ZohoMail::Error) { users.last.add_alias("hello@example.com") }
+    assert_match "EMAILADDRESS_ALREADY_EXISTS", error.message
+  end
+
+  test "deleting a user lists their ID in the body of a DELETE to the users" do
+    respond_with_users fixture("users_as_array")
+    deletion = stub_request(:delete, "https://mail.zoho.com/api/organization/#{ORGANIZATION_ID}/accounts")
+      .with(body: { accountList: [ 2000002 ] }.to_json, headers: AUTHORIZATION)
+      .to_return(body: { status: { code: 200, description: "success" } }.to_json)
+
+    users.last.destroy
+
+    assert_requested deletion
+  end
+
+  test "deleting a user raises when Zoho refuses" do
+    respond_with_users fixture("users_as_array")
+    stub_request(:delete, "https://mail.zoho.com/api/organization/#{ORGANIZATION_ID}/accounts")
+      .to_return(status: 400, body: { status: { code: 400, description: "Invalid Input" } }.to_json)
+
+    error = assert_raises(ZohoMail::Error) { users.last.destroy }
+    assert_match "member@example.com", error.message
+  end
+
   private
     def respond_with_users(response_body)
       ActiveResource::HttpMock.respond_to do |mock|
