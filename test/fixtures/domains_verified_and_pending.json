@@ -13,6 +13,16 @@
         "mxstatus": "enabled",
         "spfstatus": true,
         "dkimstatus": true,
+        "dkimDetailList": [
+          {
+            "dkimId": "1000000000000000021",
+            "selector": "zmail",
+            "isVerified": true,
+            "isDefault": true,
+            "hashType": "sha256",
+            "publicKey": "v=DKIM1; k=rsa; p=TESTKEYEXAMPLECOM"
+          }
+        ],
         "CNAMEVerificationCode": "zb10000011",
         "HTMLVerificationCode": "10000011"
       },

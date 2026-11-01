@@ -75,10 +75,18 @@ zoid = ZohoMail.organization_id
 domains = ZohoMail::Domain.all(params: { zoid: zoid })
 domains.pending.map(&:name)
 
-domain = ZohoMail::Domain.create(zoid: zoid, domainName: "example.com")
+domain = ZohoMail::Domain.create(zoid: zoid, domainName: "example.org")
 domain.txt_verification_record # the TXT record to add to the domain's DNS
 domain.verify
-domain.enable_mail_hosting
+
+# Every user of the primary domain gets the same address at example.org.
+domains.find(&:primary?).add_alias("example.org")
+
+dkim_key = domain.add_dkim_key(selector: "zmail")
+dkim_key.record_name # publish dkim_key.public_key as a TXT record with this name
+domain.verify_dkim_key(dkim_key)
+domain.verify_mx_records
+domain.verify_spf_record
 
 users = ZohoMail::User.all(params: { zoid: zoid, limit: 100 })
 users.admins.map(&:email_address)
