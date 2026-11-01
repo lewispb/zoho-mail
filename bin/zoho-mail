@@ -5,6 +5,9 @@ require_relative "../lib/zoho_mail"
 
 begin
   exit ZohoMail::CLI.new.run(ARGV)
-rescue ZohoMail::Error, ActiveResource::ConnectionError, KeyError => error
+rescue ActiveResource::ConnectionError => error
+  # Zoho explains the error in the body, such as {"data":{"moreInfo":"Mail Hosting is not enabled"}}.
+  abort [ error.message, error.response&.body ].compact.join(" ")
+rescue ZohoMail::Error, KeyError => error
   abort error.message
 end

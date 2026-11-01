@@ -9,6 +9,7 @@ class ZohoMail::CLITest < ActiveSupport::TestCase
       mock.get "/api/accounts", AUTHORIZATION, fixture("accounts")
       mock.get "/api/organization/#{ORGANIZATION_ID}/domains", AUTHORIZATION, fixture("domains_verified_and_pending")
       mock.get "/api/organization/#{ORGANIZATION_ID}/accounts?limit=100", AUTHORIZATION, fixture("users_as_array")
+      mock.get "/api/organization/#{ORGANIZATION_ID}/subscriptionInfo", AUTHORIZATION, fixture("subscription")
     end
   end
 
@@ -20,6 +21,11 @@ class ZohoMail::CLITest < ActiveSupport::TestCase
         organisation ID: #{ORGANIZATION_ID}
         plan type: 82
     TEXT
+  end
+
+  test "subscription prints the add-ons as JSON" do
+    assert @cli.run([ "subscription" ])
+    assert_equal "Mail Lite", JSON.parse(@output.string).dig("addOns", 0, "PLANNAME")
   end
 
   test "domains" do

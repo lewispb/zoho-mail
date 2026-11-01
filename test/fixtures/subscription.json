@@ -1,6 +1,11 @@
 {
   "status": { "code": 200, "description": "success" },
   "data": {
-    "currencyType": "USD"
+    "currencyType": "USD",
+    "expiryTime": "1800000000000",
+    "subscriptionType": 1,
+    "addOns": [
+      { "PLANNAME": "Mail Lite", "planCategory": "MAIL_ONLY", "planStorage": 5, "ALLOTEDUSER": 2 }
+    ]
   }
 }

@@ -1,6 +1,7 @@
 source "https://rubygems.org"
 
 gem "activeresource", "~> 6.2"
+gem "irb"
 
 group :development, :test do
   gem "rake"

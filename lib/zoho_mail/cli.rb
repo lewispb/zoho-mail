@@ -49,7 +49,7 @@ module ZohoMail
       end
 
       def subscription
-        @output.puts JSON.pretty_generate(Subscription.find(params: { zoid: ZohoMail.organization_id }).serializable_hash)
+        @output.puts JSON.pretty_generate(JSON.parse(Subscription.find(params: { zoid: ZohoMail.organization_id }).to_json))
       end
 
       def domains

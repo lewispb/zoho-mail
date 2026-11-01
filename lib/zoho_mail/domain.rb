@@ -79,8 +79,10 @@ module ZohoMail
       change("verifyMxRecord")
     end
 
+    # Zoho's documentation lists the mode as verifySpfRecord, which Zoho
+    # refuses as an invalid mode; its sample request's VerifySpfRecord works.
     def verify_spf_record
-      change("verifySpfRecord")
+      change("VerifySpfRecord")
     end
   end
 end

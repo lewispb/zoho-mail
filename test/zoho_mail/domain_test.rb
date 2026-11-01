@@ -107,7 +107,7 @@ class ZohoMail::DomainTest < ActiveSupport::TestCase
     assert_equal({ "mode" => "verifyMxRecord" }, last_request_body)
 
     pending_domain.verify_spf_record
-    assert_equal({ "mode" => "verifySpfRecord" }, last_request_body)
+    assert_equal({ "mode" => "VerifySpfRecord" }, last_request_body)
   end
 
   private
